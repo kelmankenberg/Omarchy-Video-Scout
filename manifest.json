@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "kel.omarchy-video-scout",
+  "name": "Omarchy Video Scout",
+  "version": "1.0.0",
+  "author": "kelmankenberg",
+  "license": "MIT",
+  "description": "Find recent Omarchy videos on YouTube and open or download them.",
+  "kinds": ["bar-widget"],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Video Scout",
+    "category": "Media",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}

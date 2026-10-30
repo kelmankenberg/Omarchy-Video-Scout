@@ -1,0 +1,20 @@
+{
+  "widget.tooltip": "Omarchy Video Scout",
+  "panel.title": "Omarchy on YouTube",
+  "panel.refresh": "Refresh",
+  "panel.loading": "Searching YouTube…",
+  "panel.searchFailed": "Search failed. Check your connection and yt-dlp, then refresh.",
+  "panel.searchingNote": "YouTube filters this range before returning up to 50 Omarchy matches, including Shorts. Newest first; dates are approximate. Undated results appear last. All means no date limit, not every video.",
+  "panel.empty": "No videos match this date range.",
+  "range.day": "Day",
+  "range.week": "Week",
+  "range.month": "Month",
+  "range.all": "All",
+  "video.open": "Watch",
+  "video.dateUnknown": "Date unavailable",
+  "video.download": "Download",
+  "video.downloading": "Downloading…",
+  "video.downloaded": "Saved in Videos/Omarchy Video Scout.",
+  "video.downloadFailed": "Download failed: %1",
+  "video.unknownError": "yt-dlp did not provide an error message."
+}
