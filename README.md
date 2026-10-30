@@ -6,6 +6,8 @@ watch or download videos with yt-dlp.
 
 Independent community plugin; not affiliated with YouTube or the Omarchy project.
 
+![Omarchy Video Scout showing recent videos and date filters](preview.png)
+
 ## Requirements
 
 - Omarchy Quattro with its Quickshell-based shell and plugin CLI.
