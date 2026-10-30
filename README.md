@@ -128,11 +128,17 @@ Static validation does not replace checking the running shell for errors.
 ## Marketplace submission
 
 The repository is being prepared for submission; no marketplace approval is
-claimed. Before submitting:
+claimed.
 
-- Test a clean Git-based installation, all four filters, Watch, Download,
-  disable/re-enable, shell restart, and removal.
-- Check shell summon/hide routing and Escape dismissal.
+Release checks completed on an Omarchy desktop: clean Git-based installation,
+all four filters, thumbnail loading, shell summon/hide, Escape dismissal,
+disable/re-enable, shell restart, and removal followed by reinstallation.
+Offline regression tests also run in GitHub Actions.
+
+Before submitting:
+
+- Finish end-to-end Watch and Download checks with content you are permitted
+  to download.
 - Add an optional `preview.png` showing only the plugin, with permission for
   any visible assets.
 - Confirm the license, dependencies, permissions, and removal instructions.
