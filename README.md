@@ -38,7 +38,14 @@ Do not install a second copy with the same ID.
 
 Click the play button to open the panel. Choose **Day**, **Week**, **Month**,
 or **All**, then select **Watch** or **Download** on a video. Click outside
-the panel or click the bar button again to dismiss it.
+the panel, press Escape, or click the bar button again to dismiss it.
+
+The standard shell commands also open and close the panel:
+
+```sh
+omarchy-shell shell summon kel.omarchy-video-scout '{}'
+omarchy-shell shell hide kel.omarchy-video-scout
+```
 
 - Opening, refreshing, or changing the range runs a YouTube search.
 - The default range is Week; the selection lasts until the plugin reloads.
@@ -125,8 +132,7 @@ claimed. Before submitting:
 
 - Test a clean Git-based installation, all four filters, Watch, Download,
   disable/re-enable, shell restart, and removal.
-- Check shell summon/hide routing and keyboard dismissal; the current panel
-  documents click-based interaction only.
+- Check shell summon/hide routing and Escape dismissal.
 - Add an optional `preview.png` showing only the plugin, with permission for
   any visible assets.
 - Confirm the license, dependencies, permissions, and removal instructions.

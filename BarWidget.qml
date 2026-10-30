@@ -12,6 +12,7 @@ BarWidget {
   moduleName: "kel.omarchy-video-scout"
 
   property bool popupOpen: false
+  readonly property bool opened: popupOpen
   property string dateRange: "week"
   property string status: ""
   property string downloadingId: ""
@@ -162,6 +163,13 @@ BarWidget {
     function status(): string {
       return JSON.stringify({
         searching: searchProc.running,
+        opened: root.opened,
+        panelGeometry: {
+          x: popup.cardOrigin.x,
+          y: popup.cardOrigin.y,
+          width: popup.contentWidth,
+          height: popup.contentHeight
+        },
         error: root.status,
         range: root.dateRange,
         results: root.videos.length,
@@ -228,12 +236,13 @@ BarWidget {
     onPressed: root.toggle()
   }
 
-  PopupCard {
+  KeyboardPanel {
     id: popup
     anchorItem: button
     bar: root.bar
     owner: root
     open: root.popupOpen
+    focusTarget: contentColumn
     contentWidth: popup.fittedContentWidth(Style.space(520), 640)
     contentHeight: popup.fittedContentHeight(contentColumn.implicitHeight, 660)
 
@@ -241,6 +250,8 @@ BarWidget {
       id: contentColumn
       width: parent.width
       spacing: Style.space(10)
+      focus: true
+      Keys.onEscapePressed: root.close()
 
       RowLayout {
         width: parent.width
