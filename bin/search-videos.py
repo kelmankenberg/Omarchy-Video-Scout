@@ -12,6 +12,7 @@ from urllib.parse import urlencode
 
 
 MAX_RESULTS = 50
+RESULT_LIMITS = (50, 100, 150)
 MAX_OUTPUT = 64 * 1024
 VIDEO_ID = re.compile(r"^[A-Za-z0-9_-]{11}$")
 RANGES = {"day": 2, "week": 3, "month": 4, "all": None}
@@ -38,9 +39,16 @@ def clean_text(value, limit):
     return " ".join("".join(char for char in value if char.isprintable()).split())[:limit]
 
 
-def parse_videos(output):
+def validate_limit(value):
+    if type(value) is not int or value not in RESULT_LIMITS:
+        raise ValueError("Video limit must be 50, 100, or 150.")
+    return value
+
+
+def parse_videos(output, max_results=MAX_RESULTS):
+    validate_limit(max_results)
     lines = output.decode("utf-8").splitlines()
-    if len(lines) > MAX_RESULTS * 4 or len(lines) % 4:
+    if len(lines) > max_results * 4 or len(lines) % 4:
         raise ValueError("Invalid metadata fields")
 
     videos = []
@@ -83,6 +91,12 @@ def main():
     if date_range not in RANGES:
         return fail("Invalid date range. Choose day, week, month, or all.")
     try:
+        if len(sys.argv) > 3:
+            raise ValueError("Expected a date range and optional video limit.")
+        max_results = validate_limit(int(sys.argv[2])) if len(sys.argv) > 2 else MAX_RESULTS
+    except ValueError as error:
+        return fail(str(error))
+    try:
         result = subprocess.run(
             [
                 "yt-dlp",
@@ -97,7 +111,7 @@ def main():
                 "--socket-timeout",
                 "15",
                 "--playlist-end",
-                str(MAX_RESULTS),
+                str(max_results),
                 "--print",
                 "%(id)j",
                 "--print",
@@ -122,11 +136,11 @@ def main():
     if result.returncode != 0:
         detail = clean_text(result.stderr.decode("utf-8", "replace"), 240)
         return fail(detail or "yt-dlp could not complete the YouTube search.")
-    if len(result.stdout) > MAX_OUTPUT:
+    if len(result.stdout) > MAX_OUTPUT * (max_results // MAX_RESULTS):
         return fail("The YouTube search response was too large.")
 
     try:
-        videos = parse_videos(result.stdout)
+        videos = parse_videos(result.stdout, max_results)
     except (UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError):
         return fail("yt-dlp returned invalid search data.")
 

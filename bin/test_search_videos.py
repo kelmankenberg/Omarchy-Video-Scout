@@ -3,6 +3,10 @@ import importlib.util
 import json
 from pathlib import Path
 import unittest
+from unittest.mock import patch
+import io
+from contextlib import redirect_stdout
+import subprocess
 from urllib.parse import parse_qs, urlparse
 
 
@@ -47,6 +51,32 @@ class SearchVideosTests(unittest.TestCase):
                     search.parse_videos(output)
         with self.assertRaises(ValueError):
             search.parse_videos(b'"AAAAAAAAAAA"\n')
+
+    def test_selected_limit_reaches_extractor_and_parser(self):
+        for limit in (50, 100, 150):
+            entries = [
+                (f"{index:011d}", "Video", "Channel", None)
+                for index in range(limit)
+            ]
+            output = "\n".join(json.dumps(field) for entry in entries for field in entry).encode()
+            result = subprocess.CompletedProcess([], 0, stdout=output, stderr=b"")
+            with self.subTest(limit=limit), patch.object(search.sys, "argv", ["search-videos.py", "week", str(limit)]), \
+                    patch.object(search.subprocess, "run", return_value=result) as run, redirect_stdout(io.StringIO()) as captured:
+                self.assertEqual(search.main(), 0)
+                args = run.call_args.args[0]
+                self.assertEqual(args[args.index("--playlist-end") + 1], str(limit))
+                self.assertEqual(len(json.loads(captured.getvalue())["videos"]), limit)
+            if limit > 50:
+                with self.assertRaises(ValueError):
+                    search.parse_videos(output, 50)
+
+    def test_invalid_limits_do_not_start_network_search(self):
+        for limit in ("0", "51", "200", "many"):
+            with self.subTest(limit=limit), patch.object(search.sys, "argv", ["search-videos.py", "week", limit]), \
+                    patch.object(search.subprocess, "run") as run, redirect_stdout(io.StringIO()) as captured:
+                self.assertEqual(search.main(), 1)
+                self.assertIn("error", json.loads(captured.getvalue()))
+                run.assert_not_called()
 
 
 if __name__ == "__main__":
