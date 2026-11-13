@@ -31,6 +31,7 @@
 - Watch, Download, and read/unread controls are icon-only buttons on one
   row, with translated action tooltips. Envelope icons show the current
   read state: closed for unread and open for read.
+- Refreshed the marketplace preview to show the v1.1.0 UI.
 - Opening the panel no longer starts a search. Manual Refresh remains
   available, and selecting a date filter still searches.
 - Existing results remain visible while a refresh runs.

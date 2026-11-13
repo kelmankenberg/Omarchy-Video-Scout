@@ -8,10 +8,7 @@ Independent community plugin; not affiliated with YouTube or the Omarchy project
 
 Current version: **1.1.0**. See [CHANGELOG.md](CHANGELOG.md) for release details.
 
-![Omarchy Video Scout v1.0.0 showing recent videos and date filters](preview.png)
-
-The preview shows v1.0.0; v1.1.0 adds the Setup page, unread tracking, and
-icon-only video actions described below.
+![Omarchy Video Scout v1.1.0 showing unread badges, read-state borders, and icon-only video actions](preview.png)
 
 ## Requirements
 
@@ -184,7 +181,7 @@ Static validation does not replace checking the running shell for errors.
 
 Version 1.0.0 was published to the marketplace through
 [submission #13401](https://github.com/omacom/omarchy-plugin-marketplace/issues/13401).
-Version 1.1.0 is prepared for release and updated listing review; the earlier
+Version 1.1.0 is released for updated listing review; the earlier
 validation applies only to the reviewed v1.0.0 commit, not these changes.
 
 Version 1.0.0 checks completed on an Omarchy desktop: clean Git-based installation,
@@ -202,9 +199,8 @@ The complete installable snapshot passed manifest validation, QML lint,
 build artifacts. Full removal/reinstallation was checked for v1.0.0;
 the v1.1.0 checks do not claim a fresh-machine install.
 
-Before requesting updated listing review, publish the prepared commit/release,
-confirm its GitHub Actions checks, and reference the new exact commit/version
-in the marketplace request rather than claiming the old approval covers it.
+Updated listing review must reference the new exact commit/version rather
+than claiming the old approval covers it.
 Suggested category: **Widgets**. Tags: **Bar**, **Media**, **Quickshell**.
 
 Marketplace approval is for listing and is not a security review.
