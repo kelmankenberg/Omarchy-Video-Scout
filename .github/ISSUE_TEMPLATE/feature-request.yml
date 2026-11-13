@@ -1,0 +1,34 @@
+name: Request a feature
+description: Suggest an improvement to Omarchy Video Scout.
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please search existing issues first. Opening this form through Video Scout's Setup page automatically fills the installed plugin version.
+  - type: input
+    id: version
+    attributes:
+      label: Plugin version
+      description: Automatically filled when opened from Setup. Direct GitHub visitors can find it in Setup.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the use case or limitation.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed feature
+      description: Describe how you would like it to work.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives or additional context
+      description: Optional. Include other approaches you have considered.

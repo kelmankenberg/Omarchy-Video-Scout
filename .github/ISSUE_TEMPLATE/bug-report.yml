@@ -1,0 +1,40 @@
+name: Report a bug
+description: Report a problem with Omarchy Video Scout.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please search existing issues first. Opening this form through Video Scout's Setup page automatically fills the installed plugin version.
+        Review any logs or screenshots before submitting: remove credentials and personal information.
+  - type: input
+    id: version
+    attributes:
+      label: Plugin version
+      description: Automatically filled when opened from Setup. Direct GitHub visitors can find it in Setup.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What went wrong?
+      description: Describe what happened and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include the date filter, refresh limit, and relevant settings.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Omarchy and yt-dlp versions
+      description: If available, include the output of omarchy version and yt-dlp --version.
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Screenshots or relevant error messages
+      description: Optional. Include only relevant information you are comfortable making public.
